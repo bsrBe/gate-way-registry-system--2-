@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: "https://gatewayregistry.onrender.com/",
+        target: "https://gatewayregistry.onrender.com",
         changeOrigin: true
       }
     }
