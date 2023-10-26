@@ -27,7 +27,7 @@ const RegisterCard = ({ content }) => {
 
   const getVoucher = async id => {
     try {
-      const response = await axios.get(`/api/voucher/${id}`);
+      const response = await axios.get(`https://gatewayregistry.onrender.com/api/voucher/${id}`);
       if (response.status === 200) {
         setVouchers({ ...response.data });
         console.log(vouchers.voucher);
@@ -41,7 +41,7 @@ const RegisterCard = ({ content }) => {
 
   const regenrateVoucher = async (id, voucher) => {
     try {
-      await axios.patch(`api/voucher/regenerate/${id}`, voucher, {
+      await axios.patch(`https://gatewayregistry.onrender.com/api/voucher/regenerate/${id}`, voucher, {
         headers: {
           "Content-Type": "application/json"
         }

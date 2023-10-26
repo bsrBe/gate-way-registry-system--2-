@@ -27,7 +27,7 @@ const VisitorsReregisterCard = () => {
 
   const visitorData = async id => {
     try {
-      const response = await axios.get(`/api/visitors/${id}`);
+      const response = await axios.get(`https://gatewayregistry.onrender.com/api/visitors/${id}`);
       if (response.status === 200) {
         setFormData({ ...response.data });
       } else {

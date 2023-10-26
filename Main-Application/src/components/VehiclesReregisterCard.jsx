@@ -26,7 +26,7 @@ const VehiclesReregisterCard = () => {
 
   const vehicleData = async id => {
     try {
-      const response = await axios.get(`/api/vehicles/${id}`);
+      const response = await axios.get(`https://gatewayregistry.onrender.com/api/vehicles/${id}`);
       if (response.status === 200) {
         setVehicleFromData({ ...response.data });
       } else {

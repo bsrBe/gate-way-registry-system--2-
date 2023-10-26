@@ -28,7 +28,7 @@ const ArmsReregisterCard = () => {
 
   const armsData = async id => {
     try {
-      const response = await axios.get(`/api/weapons/${id}`);
+      const response = await axios.get(`https://gatewayregistry.onrender.com/api/weapons/${id}`);
       if (response.status === 200) {
         const updatedFormData = {
           ...response.data,

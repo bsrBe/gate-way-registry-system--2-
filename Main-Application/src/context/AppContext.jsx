@@ -37,7 +37,7 @@ export const AppProvider = ({ children }) => {
   // GET data for visitors
   const fetchVisitorsData = async () => {
     try {
-      const response = await axios.get("/api/visitors");
+      const response = await axios.get("https://gatewayregistry.onrender.com/api/visitors");
       setVisitorsData(response.data);
     } catch (error) {
       console.error("Error fetching weapons data:", error);
@@ -51,7 +51,7 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.post("/api/visitors", formData, {
+      const response = await axios.post("https://gatewayregistry.onrender.com/api/visitors", formData, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -67,7 +67,7 @@ export const AppProvider = ({ children }) => {
   // EDIT one Visitor Data
   const editVisitorData = async (id, editData) => {
     try {
-      await axios.patch(`/api/visitors/${id}`, editData, {
+      await axios.patch(`https://gatewayregistry.onrender.com/api/visitors/${id}`, editData, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -85,7 +85,7 @@ export const AppProvider = ({ children }) => {
   // GET data for weapons
   const fetchWeaponsData = async () => {
     try {
-      const response = await axios.get("/api/weapons");
+      const response = await axios.get("https://gatewayregistry.onrender.com/api/weapons");
       setWeaponsData(response.data);
     } catch (error) {
       console.error("Error fetching weapons data:", error);
@@ -95,7 +95,7 @@ export const AppProvider = ({ children }) => {
   // GET data for not-taken weapons
   const fetchWeaponsControllerData = async () => {
     try {
-      const response = await axios.get("/api/weapons/weaponcontroller");
+      const response = await axios.get("https://gatewayregistry.onrender.com/api/weapons/weaponcontroller");
       setWeaponsControllerData(response.data);
     } catch (error) {
       console.error("Error fetching weapons data:", error);
@@ -105,7 +105,7 @@ export const AppProvider = ({ children }) => {
   // Updating the Taken no-Taken Status
   const updateWeaponStatus = async (itemId, updatedData) => {
     try {
-      await axios.patch(`/api/weapons/${itemId}`, updatedData, {
+      await axios.patch(`https://gatewayregistry.onrender.com/api/weapons/${itemId}`, updatedData, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -128,7 +128,7 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.post("/api/weapons", weaponFormData, {
+      const response = await axios.post("https://gatewayregistry.onrender.com/api/weapons", weaponFormData, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -144,7 +144,7 @@ export const AppProvider = ({ children }) => {
   // EDIT one weapons Data
   const editWeaponsData = async (id, editData) => {
     try {
-      await axios.patch(`/api/weapons/${id}`, editData, {
+      await axios.patch(`https://gatewayregistry.onrender.com/api/weapons/${id}`, editData, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -162,7 +162,7 @@ export const AppProvider = ({ children }) => {
   // Get all data for Vehicles
   const fetchVehiclesData = async () => {
     try {
-      const response = await axios.get("/api/vehicles");
+      const response = await axios.get("https://gatewayregistry.onrender.com/api/vehicles");
       setVehicleData(response.data);
     } catch (error) {
       console.error("Error fetching weapons data:", error);
@@ -176,7 +176,7 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.post("/api/vehicles", vehiclesFromData, {
+      const response = await axios.post("https://gatewayregistry.onrender.com/api/vehicles", vehiclesFromData, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -192,7 +192,7 @@ export const AppProvider = ({ children }) => {
   // EDIT one weapons Data
   const editVehiclesData = async (id, editData) => {
     try {
-      await axios.patch(`/api/vehicles/${id}`, editData, {
+      await axios.patch(`https://gatewayregistry.onrender.com/api/vehicles/${id}`, editData, {
         headers: {
           "Content-Type": "application/json"
         }

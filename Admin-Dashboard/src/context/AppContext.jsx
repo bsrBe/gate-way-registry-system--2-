@@ -37,7 +37,7 @@ export const AppProvider = ({ children }) => {
   // GET data of users
   const fetchUsersData = async () => {
     try {
-      const response = await axios.get("/api/users/list");
+      const response = await axios.get("https://gatewayregistry.onrender.com/api/users/list");
       setUser(response.data);
     } catch (error) {
       console.log("Errror fetching users Data", error);
@@ -47,7 +47,7 @@ export const AppProvider = ({ children }) => {
   const deleteUser = async id => {
     try {
       if (window.confirm("Are you Sure You To Delete This Item??")) {
-        await axios.delete(`/api/users/list/${id}`);
+        await axios.delete(`https://gatewayregistry.onrender.com/api/users/list/${id}`);
         fetchUsersData();
         toast.info(`Deleted User Data`);
       }
@@ -61,7 +61,7 @@ export const AppProvider = ({ children }) => {
   // GET data for visitors
   const fetchVisitorsData = async () => {
     try {
-      const response = await axios.get("/api/visitors");
+      const response = await axios.get("https://gatewayregistry.onrender.com/api/visitors");
       setVisitorsData(response.data);
     } catch (error) {
       console.error("Error fetching weapons data:", error);
@@ -71,7 +71,7 @@ export const AppProvider = ({ children }) => {
   // EDIT one Visitor Data
   const editVisitorData = async (id, editData) => {
     try {
-      await axios.patch(`/api/visitors/${id}`, editData, {
+      await axios.patch(`https://gatewayregistry.onrender.com/api/visitors/${id}`, editData, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -88,7 +88,7 @@ export const AppProvider = ({ children }) => {
   const deleteVisitorData = async id => {
     try {
       if (window.confirm("Are you Sure You To Delete This Item??")) {
-        await axios.delete(`/api/visitors/${id}`);
+        await axios.delete(`https://gatewayregistry.onrender.com/api/visitors/${id}`);
         fetchVisitorsData();
         toast.info(`deleted Visitor Data`);
       }
@@ -103,7 +103,7 @@ export const AppProvider = ({ children }) => {
   // GET data for weapons
   const fetchWeaponsData = async () => {
     try {
-      const response = await axios.get("/api/weapons");
+      const response = await axios.get("https://gatewayregistry.onrender.com/api/weapons");
       setWeaponsData(response.data);
     } catch (error) {
       console.error("Error fetching weapons data:", error);
@@ -113,7 +113,7 @@ export const AppProvider = ({ children }) => {
   // GET data for not-taken weapons
   const fetchWeaponsControllerData = async () => {
     try {
-      const response = await axios.get("/api/weapons/weaponcontroller");
+      const response = await axios.get("https://gatewayregistry.onrender.com/api/weapons/weaponcontroller");
       setWeaponsControllerData(response.data);
     } catch (error) {
       console.error("Error fetching weapons data:", error);
@@ -123,7 +123,7 @@ export const AppProvider = ({ children }) => {
   // Updating the Taken no-Taken Status
   const updateWeaponStatus = async (itemId, updatedData) => {
     try {
-      await axios.patch(`/api/weapons/${itemId}`, updatedData, {
+      await axios.patch(`https://gatewayregistry.onrender.com/api/weapons/${itemId}`, updatedData, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -141,7 +141,7 @@ export const AppProvider = ({ children }) => {
   // EDIT one weapons Data
   const editWeaponsData = async (id, editData) => {
     try {
-      await axios.patch(`/api/weapons/${id}`, editData, {
+      await axios.patch(`https://gatewayregistry.onrender.com/api/weapons/${id}`, editData, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -158,7 +158,7 @@ export const AppProvider = ({ children }) => {
   const deleteWeaponsData = async id => {
     try {
       if (window.confirm("Are you Sure You To Delete This Item??")) {
-        await axios.delete(`/api/weapons/${id}`);
+        await axios.delete(`https://gatewayregistry.onrender.com/api/weapons/${id}`);
         fetchWeaponsData();
         toast.info(`deleted Weapons Data`);
       }
@@ -173,7 +173,7 @@ export const AppProvider = ({ children }) => {
   // Get all data for Vehicles
   const fetchVehiclesData = async () => {
     try {
-      const response = await axios.get("/api/vehicles");
+      const response = await axios.get("https://gatewayregistry.onrender.com/api/vehicles");
       setVehicleData(response.data);
     } catch (error) {
       console.error("Error fetching weapons data:", error);
@@ -184,7 +184,7 @@ export const AppProvider = ({ children }) => {
   const deleteVehicleData = async id => {
     try {
       if (window.confirm("Are you Sure You To Delete This Item??")) {
-        await axios.delete(`/api/vehicles/${id}`);
+        await axios.delete(`https://gatewayregistry.onrender.com/api/vehicles/${id}`);
         fetchVehiclesData();
         toast.info(`deleted Vehicles Data`);
       }
@@ -197,7 +197,7 @@ export const AppProvider = ({ children }) => {
   // EDIT one weapons Data
   const editVehiclesData = async (id, editData) => {
     try {
-      await axios.patch(`/api/vehicles/${id}`, editData, {
+      await axios.patch(`https://gatewayregistry.onrender.com/api/vehicles/${id}`, editData, {
         headers: {
           "Content-Type": "application/json"
         }
