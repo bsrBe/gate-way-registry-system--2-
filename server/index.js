@@ -30,6 +30,8 @@ const allowedOrigins = [
     'http://localhost:4173',
     'http://localhost:4174',
     'https://gate-registry-system.vercel.app',
+    'gate-way-registry-system-2-mlbo-8l354dlw3-bsrbe.vercel.app',
+    'gate-way-registry-system-2-hx8bbu5zw-bsrbe.vercel.app',
 ]
 app.use(cors({
     origin: function (origin, callback) {
