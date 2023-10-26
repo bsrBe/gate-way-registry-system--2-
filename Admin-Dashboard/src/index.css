@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap"); */
+:root {
+  --main-theme-color: #0c2a4c;
+  --accent-color: #dcc380;
+}
+
+* {
+  transition: all 0.2s ease-in;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+.logo {
+  animation: ror 5s ease-in infinite forwards;
+}
+.sidebar {
+  transition: none;
+}
+.sidebar::-webkit-scrollbar {
+  width: 0.35em;
+}
+.sidebar::-webkit-scrollbar-track {
+  width: 100%;
+  background-color: transparent;
+  cursor: pointer;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 0.5em;
+}
+.sidebar:hover::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  cursor: pointer;
+}
+.sidebar h2 {
+  display: flex;
+  align-items: center;
+  padding: 0.75em 0;
+  padding-left: 1em;
+  margin: 0.25em 0;
+  color: var(--accent-color);
+  border-radius: 0 0.35em 0.35em 0;
+  font-size: 15px;
+}
+.sidebar p {
+  font-weight: bold;
+  margin: 0.75em 0;
+  color: var(--accent-color);
+}
+.sidebar h2:hover {
+  background-color: #dcc38090;
+  color: #ffffff;
+  cursor: pointer;
+}
+.sidebar .active{
+  background-color: #dcc38060;
+  color: #ffffff;
+  cursor: pointer;
+  border-left:6px solid var(--accent-color);
+}
+.logo:hover {
+  filter: drop-shadow(2px 6px 8px var(--accent-color));
+}
+.registry input {
+  border: 1px solid red;
+  text-indent: 0.5em;
+  outline-color: var(--main-theme-color);
+}
+.registry label {
+  font-weight: bold;
+}
+.table {
+  font-family: serif;
+}
+.table td {
+  /* padding-left:1em; */
+  font-size: 12px;
+}
+/* form style */
+.inputBox {
+  position: relative;
+  width: 24em;
+  /* margin-top: 10px; */
+}
+.inputBox input {
+  position: relative;
+  width: 100%;
+  padding: 20px 10px 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #131313;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  background-color: #aaaaaa50;
+  z-index: 10;
+}
+.inputBox span {
+  position: absolute;
+  left: 0;
+  padding: 20px 10px 10px;
+  font-size: 1em;
+  color: #131313;
+  pointer-events: none;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  margin-bottom: 0.5em;
+}
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+  color: var(--main-theme-color);
+  transform: translate(-10px, -34px);
+  font-size: 0.85em;
+  font-weight: bolder;
+  margin-bottom: 4px;
+}
+
+.inputBox i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--main-theme-color);
+  border-radius: 4px;
+  transition: 0.5s;
+  pointer-events: none;
+  z-index: 9;
+  margin-top: 0.5em;
+}
+
+.inputBox input:valid ~ i,
+.inputBox input:focus ~ i {
+  height: 100%;
+  border: 1px solid var(--main-theme-color);
+  background-color: #ffffff;
+}
+
+
+.profile:hover::after{
+  content: "Profile";
+  position: fixed;
+  top: 13.8em;
+  background-color:#dddddd60;
+  border: .5px soild var(--main-theme-color);
+  padding: .25em 1em;
+  border-radius: .2em;
+  color: var(--main-theme-color);
+  box-shadow: 1px 1px 2px #13131350;
+  font-size: 12px;
+  font-weight: bold;
+}
+.voucher{
+  letter-spacing: 1px;
+}
+
+.info-card{
+  border-radius: .35em .35em 0em 0em;
+}

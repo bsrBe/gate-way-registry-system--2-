@@ -1,0 +1,2 @@
+This is the production Test release of Gateway registration manamgement system developed for Ethiopian Federal Police
+A Link For this Test Release is https://gate-registry-system.vercel.app/ deployed on vercel
