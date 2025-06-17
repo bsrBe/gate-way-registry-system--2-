@@ -25,26 +25,26 @@ connectDB();
 // Initialize Express app
 const app = express();
 
-// ✅ CORS setup for cookie support
+// ✅ CORS setup for cross-origin requests with cookies
 const allowedOrigin = 'https://gate-way-registry-system-2.vercel.app';
 
-app.use(cors({
+const corsOptions = {
   origin: allowedOrigin,
-  credentials: true
-}));
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
-// ✅ Handle preflight requests (CORS OPTIONS)
-app.options('*', cors({
-  origin: allowedOrigin,
-  credentials: true
-}));
+// ✅ Apply CORS BEFORE other middlewares
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Preflight support
 
-// Middleware
+// ✅ Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// API Routes
+// ✅ Routes
 app.use('/api/users', userRoutes);
 app.use('/api/visitors', visitorsRoute);
 app.use('/api/weapons', weaponsRoute);
@@ -52,25 +52,26 @@ app.use('/api/vehicles', vehiclesRoute);
 app.use('/api/admin', adminRoute);
 app.use('/api/voucher', voucherRoute);
 
-// Catch-all route for invalid endpoints
+// ✅ Root route
+app.get('/', (req, res) => {
+  res.send(`Hello User, server is running on Port: ${process.env.PORT}`);
+});
+
+// ✅ Catch-all route for invalid endpoints
 app.use('*', (req, res) => {
   res.status(404).json({ message: 'Not a valid path. Please return to a valid endpoint.' });
 });
 
-// Root route for testing
-app.get('/', (req, res) => {
-  res.send(`Hello User, running on Port: ${process.env.PORT}`);
-});
-
-// Error handling middleware
+// ✅ Error handling middleware
 app.use(notFound);
 app.use(errorHandler);
 
-// Start server
+// ✅ Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`🚀 Server is running at http://localhost:${PORT}`);
 });
+
 
 // *********************** Some @desc about the folder structure and overall project arichtecture *********************************
 //
