@@ -29,10 +29,8 @@ const allowedOrigins = [
     'http://localhost:5174',
     'http://localhost:4173',
     'http://localhost:4174',
-    'https://gate-registry-system.vercel.app',
-    'gate-way-registry-system-2-mlbo-8l354dlw3-bsrbe.vercel.app',
-    'gate-way-registry-system-2-hx8bbu5zw-bsrbe.vercel.app',
-    "https://gate-way-registry-system-2.vercel.app"
+    'https://gate-way-registry-system.vercel.app',
+    'https://gate-way-registry-system-2.vercel.app'
 ]
 app.use(cors({
     origin: function (origin, callback) {
@@ -75,21 +73,21 @@ app.listen(process.env.PORT || 5000, () => {
 
 // *********************** Some @desc about the folder structure and overall project arichtecture *********************************
 //
-// 1) =>config Folder :: contains a boilerplate to connect to our database MONGODB (You can put your own connection link in the .env file)😀
+// 1) Config Folder :: contains a boilerplate to connect to our database MONGODB (You can put your own connection link in the .env file)😀
 //
-// 2) =>controllers Folder :: contains all the logic behind our endpoints this is where we stuffed all the operations😎
+// 2) Controllers Folder :: contains all the logic behind our endpoints this is where we stuffed all the operations 😎
 //
-// 3) =>middleware Folder :: Here we have diffrent custom middlewares for authentication ,Error handling and etc..💤
+// 3) Middleware Folder :: Here we have diffrent custom middlewares for authentication ,Error handling and etc..💤
 //
-// 4) =>model Folder :: here are all of our Schemas used to store our data 😁
+// 4) Model Folder :: here are all of our Schemas used to store our data 😁
 //
-// 5) =>routes Folder :: Here we actually routed our endpoints by the functions from controllers and we used our middleware here too💻
+// 5) Routes Folder :: Here we actually routed our endpoints by the functions from controllers and we used our middleware here too 💻
 //
-// 6) =>utils Folder :: Here we will SIGN our JWT token and specify all other properties like expiration date and security and others
+// 6) Utils Folder :: Here we will SIGN our JWT token and specify all other properties like expiration date and security and others
 //
-// **NOTES
+// **NOTES**
 // YOU CAN TEST THE ENDPOINTS ETHIER USING THE VS CODE EXTENSION (REST CLIENT) OR POSTMAN OR ANY OTHER TOOL OF YOUR LIKING
-// THE SCRIPT FOR DEV TESTING IS (NPM RUN SERVER)
+// THE SCRIPT FOR DEV TESTING IS (**NPM RUN SERVER)
 // ======================================= Check the code for additional Info =====================================
 
 
