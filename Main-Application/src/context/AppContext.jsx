@@ -2,29 +2,23 @@ import { createContext, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const { userInfo } = useSelector(state => state.auth);
-  // userInfo && console.log(userInfo.name);
-  // sidebar collapse controller
+
   const [collapse, setCollapse] = useState(false);
-  // form and database states
   const [visitorsData, setVisitorsData] = useState([]);
   const [weaponsData, setWeaponsData] = useState([]);
   const [weaponsControllerData, setWeaponsControllerData] = useState([]);
   const [vehicleData, setVehicleData] = useState([]);
-  // form and database states
 
-  // user-interface Functions
   const handleSidebarCollapse = () => {
     setCollapse(prev => !prev);
   };
-  // user-interface Functions
 
-  // /api Fetch <GET,POST,PATCH,DELETE> Functions
-
-  // running the GET request functions
+  // On component mount, fetch data
   useEffect(() => {
     fetchWeaponsData();
     fetchVisitorsData();
@@ -32,108 +26,108 @@ export const AppProvider = ({ children }) => {
     fetchWeaponsControllerData();
   }, []);
 
-  //======== Visitors CURD Operation ===============
+  // ============ Visitors ============
 
-  // GET data for visitors
   const fetchVisitorsData = async () => {
     try {
-      const response = await axios.get("https://gatewayregistry.onrender.com/api/visitors");
+      const response = await axios.get("https://grs-gbeb.onrender.com/api/visitors", {
+        withCredentials: true,
+      });
       setVisitorsData(response.data);
     } catch (error) {
-      console.error("Error fetching weapons data:", error);
+      console.error("Error fetching visitors data:", error);
     }
   };
 
-  // POST visitors data
   const handleFormSubmission = async formData => {
-    if (userInfo && userInfo.name) {
+    if (userInfo?.name) {
       formData.officerOnDuty = userInfo.name;
     }
 
     try {
-      const response = await axios.post("https://gatewayregistry.onrender.com/api/visitors", formData, {
+      await axios.post("https://grs-gbeb.onrender.com/api/visitors", formData, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       });
-      toast.success(`${formData.name} succesfuly is registerd`);
+      toast.success(`${formData.name} successfully registered`);
       fetchVisitorsData();
     } catch (error) {
       console.error("Error posting visitor data:", error);
-      toast.error(`Error posting visitor data, ${formData._id}`);
+      toast.error(`Error posting visitor data`);
     }
   };
 
-  // EDIT one Visitor Data
   const editVisitorData = async (id, editData) => {
     try {
-      await axios.patch(`https://gatewayregistry.onrender.com/api/visitors/${id}`, editData, {
+      await axios.patch(`https://grs-gbeb.onrender.com/api/visitors/${id}`, editData, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       });
       fetchVisitorsData();
-      toast.info(`Edited item id ${id} and ${editData.name}`);
+      toast.info(`Edited visitor: ${editData.name}`);
     } catch (error) {
-      console.error("Error Editing visitors data:", error);
-      toast.error(`Error Editing Data of ${editData.name}`);
+      console.error("Error editing visitor data:", error);
+      toast.error(`Error editing visitor: ${editData.name}`);
     }
   };
 
-  // ========= Weapons CURD Operations ==========
+  // ============ Weapons ============
 
-  // GET data for weapons
   const fetchWeaponsData = async () => {
     try {
-      const response = await axios.get("https://gatewayregistry.onrender.com/api/weapons");
+      const response = await axios.get("https://grs-gbeb.onrender.com/api/weapons", {
+        withCredentials: true,
+      });
       setWeaponsData(response.data);
     } catch (error) {
       console.error("Error fetching weapons data:", error);
     }
   };
 
-  // GET data for not-taken weapons
   const fetchWeaponsControllerData = async () => {
     try {
-      const response = await axios.get("https://gatewayregistry.onrender.com/api/weapons/weaponcontroller");
+      const response = await axios.get("https://grs-gbeb.onrender.com/api/weapons/weaponcontroller", {
+        withCredentials: true,
+      });
       setWeaponsControllerData(response.data);
     } catch (error) {
-      console.error("Error fetching weapons data:", error);
+      console.error("Error fetching weapon controller data:", error);
     }
   };
 
-  // Updating the Taken no-Taken Status
   const updateWeaponStatus = async (itemId, updatedData) => {
     try {
-      await axios.patch(`https://gatewayregistry.onrender.com/api/weapons/${itemId}`, updatedData, {
+      await axios.patch(`https://grs-gbeb.onrender.com/api/weapons/${itemId}`, updatedData, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       });
       fetchWeaponsControllerData();
-      toast.info(`Updated status of firearms Data with id ${itemId}`);
-      console.log(`Updated status of firearms Data id ${itemId}`);
+      toast.info(`Updated weapon status for ID ${itemId}`);
     } catch (error) {
       console.error("Error updating weapon status:", error);
-      toast.error("Error updating weapon status:");
-      // Handle errors or display a toast message if needed
+      toast.error("Error updating weapon status");
     }
   };
 
-  // POST Weapons Data
   const handleWeaponFormSubmission = async weaponFormData => {
-    // Ensure that userInfo is available and has the necessary data
-    if (userInfo && userInfo.name) {
+    if (userInfo?.name) {
       weaponFormData.officerOnDuty = userInfo.name;
     }
 
     try {
-      const response = await axios.post("https://gatewayregistry.onrender.com/api/weapons", weaponFormData, {
+      await axios.post("https://grs-gbeb.onrender.com/api/weapons", weaponFormData, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       });
-      toast.success(`${weaponFormData.name} succesfuly is registerd`);
+      toast.success(`${weaponFormData.name} successfully registered`);
       fetchWeaponsData();
     } catch (error) {
       console.error("Error posting weapon data:", error);
@@ -141,70 +135,70 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  // EDIT one weapons Data
   const editWeaponsData = async (id, editData) => {
     try {
-      await axios.patch(`https://gatewayregistry.onrender.com/api/weapons/${id}`, editData, {
+      await axios.patch(`https://grs-gbeb.onrender.com/api/weapons/${id}`, editData, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       });
       fetchWeaponsData();
-      toast.info(`Edited item id ${id} and ${editData.name}`);
+      toast.info(`Edited weapon: ${editData.name}`);
     } catch (error) {
-      console.error("Error Editing weapons data:", error);
-      toast.error(`Error Editing Data of ${editData.name}`);
+      console.error("Error editing weapon data:", error);
+      toast.error(`Error editing weapon: ${editData.name}`);
     }
   };
 
-  // ======= Vehicle CURD Operations ============
+  // ============ Vehicles ============
 
-  // Get all data for Vehicles
   const fetchVehiclesData = async () => {
     try {
-      const response = await axios.get("https://gatewayregistry.onrender.com/api/vehicles");
+      const response = await axios.get("https://grs-gbeb.onrender.com/api/vehicles", {
+        withCredentials: true,
+      });
       setVehicleData(response.data);
     } catch (error) {
-      console.error("Error fetching weapons data:", error);
+      console.error("Error fetching vehicles data:", error);
     }
   };
 
-  // POST vehicles data
   const handleVehicleFromSubmission = async vehiclesFromData => {
-    if (userInfo && userInfo.name) {
+    if (userInfo?.name) {
       vehiclesFromData.officerOnDuty = userInfo.name;
     }
 
     try {
-      const response = await axios.post("https://gatewayregistry.onrender.com/api/vehicles", vehiclesFromData, {
+      await axios.post("https://grs-gbeb.onrender.com/api/vehicles", vehiclesFromData, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       });
-      toast.success(`${vehiclesFromData.vehicleOwner} succesfuly is registerd`);
+      toast.success(`${vehiclesFromData.vehicleOwner} successfully registered`);
       fetchVehiclesData();
     } catch (error) {
-      console.error("Error posting vehicles data:", error);
-      toast.error("Error posting vehicles data");
+      console.error("Error posting vehicle data:", error);
+      toast.error("Error posting vehicle data");
     }
   };
 
-  // EDIT one weapons Data
   const editVehiclesData = async (id, editData) => {
     try {
-      await axios.patch(`https://gatewayregistry.onrender.com/api/vehicles/${id}`, editData, {
+      await axios.patch(`https://grs-gbeb.onrender.com/api/vehicles/${id}`, editData, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       });
       fetchVehiclesData();
-      toast.info(`Edited item id ${id} and ${editData.vehicleOwner}`);
+      toast.info(`Edited vehicle: ${editData.vehicleOwner}`);
     } catch (error) {
-      console.error("Error Editing Vehicles data:", error);
-      toast.error(`Error Editing Data of ${editData.vehicleOwner}`);
+      console.error("Error editing vehicle data:", error);
+      toast.error(`Error editing vehicle: ${editData.vehicleOwner}`);
     }
   };
-  // /api Fetch <GET,POST,PATCH,DELETE> Functions
 
   return (
     <AppContext.Provider
@@ -225,7 +219,7 @@ export const AppProvider = ({ children }) => {
         fetchVisitorsData,
         fetchWeaponsData,
         fetchVehiclesData,
-        handleSidebarCollapse
+        handleSidebarCollapse,
       }}
     >
       {children}
