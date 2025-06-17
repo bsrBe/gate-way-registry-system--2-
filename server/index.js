@@ -1,75 +1,76 @@
-// imorting Express for out http endpoints
-import express from 'express'
-// importing cors for more security and access control 
-import cors from 'cors'
-// importing dotenv for bringing in the enviroment variables in our .env file
-import dotenv from 'dotenv'
-// importing cookie-pareser for parsing our http-only-cookie which is signed by JWT to store in the clients Local Storage
-import cookieParser from 'cookie-parser'
-// importing Databse connection function/method
-import connectDB from './config/db.js'
-// importing error handler middleware
-import { notFound, errorHandler } from './middleware/errorMiddleware.js'
-// importing API endpoints here
-import userRoutes from './routes/userRoutes.js'
-import weaponsRoute from './routes/weaponsRoute.js'
-import visitorsRoute from './routes/visitorsRoute.js'
-import vehiclesRoute from './routes/vehiclesRoute.js'
-import adminRoute from './routes/adminRoute.js'
-import voucherRoute from './routes/voucherRoute.js'
-// Bringing in enviroment variables via dotenv and initalizing Database connection, and
-// Initalizing express By Invoking the express() method on the and assigning it to app variable
-dotenv.config()
-connectDB()
+// Importing dependencies
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+
+// Importing database connection and error middleware
+import connectDB from './config/db.js';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+
+// Importing routes
+import userRoutes from './routes/userRoutes.js';
+import weaponsRoute from './routes/weaponsRoute.js';
+import visitorsRoute from './routes/visitorsRoute.js';
+import vehiclesRoute from './routes/vehiclesRoute.js';
+import adminRoute from './routes/adminRoute.js';
+import voucherRoute from './routes/voucherRoute.js';
+
+// Load .env variables
+dotenv.config();
+
+// Connect to MongoDB
+connectDB();
+
+// Initialize Express app
 const app = express();
 
-// Middlewares used
-const allowedOrigins = [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:4173',
-    'http://localhost:4174',
-    'https://gate-way-registry-system.vercel.app',
-    'https://gate-way-registry-system-2.vercel.app'
-]
+// ✅ CORS setup for cookie support
+const allowedOrigin = 'https://gate-way-registry-system-2.vercel.app';
+
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by Cors'))
-        }
-    },
-    credentials: true
+  origin: allowedOrigin,
+  credentials: true
 }));
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser())
+
+// ✅ Handle preflight requests (CORS OPTIONS)
+app.options('*', cors({
+  origin: allowedOrigin,
+  credentials: true
+}));
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // API Routes
-app.use('/api/users', userRoutes)
-app.use('/api/visitors', visitorsRoute)
-app.use('/api/weapons', weaponsRoute)
-app.use('/api/vehicles', vehiclesRoute)
-app.use('/api/admin', adminRoute)
-app.use('/api/voucher', voucherRoute)
-// API Route for non-valid EndPoints
-app.use('*', (req, res) => { res.json({"message":"not vaild path please return to a vaild endpoint"}) })
+app.use('/api/users', userRoutes);
+app.use('/api/visitors', visitorsRoute);
+app.use('/api/weapons', weaponsRoute);
+app.use('/api/vehicles', vehiclesRoute);
+app.use('/api/admin', adminRoute);
+app.use('/api/voucher', voucherRoute);
 
-
-// Sending Testing for browser
-app.get("/", (req, res) => { res.send(`Hello User of Port:${process.env.PORT}`) });
-
-// error handler Middlewares
-app.use(notFound)
-app.use(errorHandler)
-
-// app's Running Enviroment
-app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server is running on port http://loclahost:${process.env.PORT}`);
+// Catch-all route for invalid endpoints
+app.use('*', (req, res) => {
+  res.status(404).json({ message: 'Not a valid path. Please return to a valid endpoint.' });
 });
 
+// Root route for testing
+app.get('/', (req, res) => {
+  res.send(`Hello User, running on Port: ${process.env.PORT}`);
+});
 
+// Error handling middleware
+app.use(notFound);
+app.use(errorHandler);
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
 
 // *********************** Some @desc about the folder structure and overall project arichtecture *********************************
 //
